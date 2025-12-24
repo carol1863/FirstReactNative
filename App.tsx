@@ -11,6 +11,11 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import routes from './src/routes';
+
+const Stack = createNativeStackNavigator();
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,10 +33,22 @@ function AppContent() {
 
   return (
     <View style={styles.container}>
-      <NewAppScreen
+      {/*<NewAppScreen
         templateFileName="App.tsx"
         safeAreaInsets={safeAreaInsets}
-      />
+      />*/}
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Resource">
+          {routes.map(route => (
+            <Stack.Screen
+              key={route.name}
+              name={route.name}
+              component={route.component}
+              options={{ headerShown: false }}
+            />
+          ))}
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
