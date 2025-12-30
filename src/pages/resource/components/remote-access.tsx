@@ -1,6 +1,7 @@
-import { StyleSheet, Switch, Text, View } from 'react-native';
-import StyledCard from './styled-card';
 import { useState } from 'react';
+import { StyleSheet, Switch, Text, View } from 'react-native';
+
+import StyledCard from './styled-card';
 
 export default function RemoteAccess() {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -17,16 +18,18 @@ export default function RemoteAccess() {
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isEnabled}
+          style={{ transform: [{ scale: 0.8 }] }}
         />
       }
     >
-      <View style={styles.cardContent}></View>
+      <View style={styles.cardContent} />
       <View style={styles.cardFooter}>
         <View style={styles.cardFooterItem}>
-          <Text>安全状态</Text>
+          <Text style={styles.itemTitle}>安全状态</Text>
           <Text
             style={{
               color: 'white',
+              fontSize: 10,
               lineHeight: 20,
               fontWeight: 500,
               backgroundColor: '#1890FF',
@@ -39,12 +42,12 @@ export default function RemoteAccess() {
           </Text>
         </View>
         <View style={styles.cardFooterItem}>
-          <Text>网络传输</Text>
-          <Text>50MB/s</Text>
+          <Text style={styles.itemTitle}>网络传输</Text>
+          <Text style={styles.itemSubtitle}>50MB/s</Text>
         </View>
         <View style={styles.cardFooterItem}>
-          <Text>运行时常</Text>
-          <Text>30 分钟</Text>
+          <Text style={styles.itemTitle}>运行时常</Text>
+          <Text style={styles.itemSubtitle}>30 分钟</Text>
         </View>
       </View>
     </StyledCard>
@@ -71,5 +74,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 4,
+  },
+  itemTitle: {
+    fontSize: 12,
+    color: '#282731',
+  },
+  itemSubtitle: {
+    fontSize: 10,
+    color: '#282731',
   },
 });

@@ -1,4 +1,5 @@
-import { StatusBar, useColorScheme, View } from 'react-native';
+import { useEffect } from 'react';
+import { BackHandler, StatusBar, useColorScheme, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,6 +14,17 @@ const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function App() {
+  useEffect(() => {
+    // 禁用物理返回键
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        return true;
+      },
+    );
+    return () => backHandler.remove();
+  }, []);
+
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
@@ -35,13 +47,13 @@ function AppContent() {
               key={route.name}
               name={route.name}
               component={route.component}
-              options={{ headerShown: false }}
+              options={{ headerShown: false, gestureEnabled: false }}
             />
           ))}
           <Stack.Screen
             name="SettingDrawer"
             component={DrawerView}
-            options={{ headerShown: false }}
+            options={{ headerShown: false, gestureEnabled: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

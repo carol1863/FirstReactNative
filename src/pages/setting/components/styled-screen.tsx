@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#F3F7FA',
     boxSizing: 'border-box',
-    paddingTop: 40,
+    paddingTop: 60,
   },
   header: {
     width: '100%',
